@@ -1,15 +1,16 @@
-import { useGSAP } from "@gsap/react";
+﻿import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { SplitText } from "gsap/all";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef, useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
+import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
 
 const Hero = () => {
-    const videoRef = useRef();
     const heroRef = useRef();
     const titleRef = useRef();
 
@@ -68,34 +69,32 @@ const Hero = () => {
     return (
         <>
             <section ref={heroRef} id="hero" className="relative min-h-screen w-full overflow-hidden">
-                {/* Background video */}
-                <video
-                    ref={videoRef}
-                    muted
-                    autoPlay
-                    loop
-                    playsInline
-                    preload="auto"
-                    src="/videos/hero.mp4"
+                {/* Background image */}
+                <img
+                    src="/images/hero1.png"
+                    alt="ZenTea Hero"
                     className="absolute inset-0 w-full h-full object-cover z-[-1]"
                 />
 
-                
+
                 <div className="relative z-10 flex flex-col items-center justify-center h-full text-white">
                     <h1 ref={titleRef} className="title hero-text">ZenTea</h1>
 
                     <div className="content text-center mt-6">
-                        <p className="subtitle hero-text text-lg md:text-2xl">Finest Ceylon Tea</p>
-                        <p className="subtitle mt-4 max-w-xl hero-text">
+                        <p className="subtitle hero-text text-xl md:text-3xl font-bold">Finest Ceylon Tea</p>
+                        <p className="subtitle mt-4 max-w-xl hero-text font-medium text-white/90">
                            Summer is one of our favourite seasons and we are bringing you a collection
-                            of the finest Ceylon Tea to keep you cool and refreshed all Summer long!.
+                            of the finest Ceylon Tea to keep you cool and refreshed all Summer long!
                         </p>
-                        <a
-                            href="#cocktails"
-                            className="mt-6 inline-block font-semibold opacity-80 hover:text-yellow"
-                        >
-                            Shop 
-                        </a>
+                        <div className="flex justify-center mt-3 hero-text">
+                            <Link
+                                to="/shop"
+                                className="group flex items-center gap-2 px-5 py-2 bg-white text-black font-bold rounded-full hover:bg-transparent hover:text-white border-2 border-white transition-all duration-300 uppercase tracking-widest text-[10px]"
+                            >
+                                Shop Now
+                                <ArrowRight className="w-3 h-3 transition-transform duration-300 group-hover:translate-x-1" />
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </section>

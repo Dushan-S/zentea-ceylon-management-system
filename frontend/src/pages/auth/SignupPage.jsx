@@ -5,6 +5,9 @@ import { onlyLetters, isPhone, strongPassword } from "../../utils/validation";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function SignupPage() {
+  // Allowed public roles - Admin is excluded
+  const ALLOWED_PUBLIC_ROLES = ["Collector", "Supplier", "Employee", "Customer"];
+  
   const [form, setForm] = useState({
     role: "Customer",
     name: "",
@@ -201,7 +204,7 @@ export default function SignupPage() {
                     onChange={change}
                     className="mt-1 w-full border border-neutral-300 rounded-md py-2 px-3 bg-white text-[14px] focus:outline-none focus:ring-2 focus:ring-black"
                   >
-                    {["Admin", "Collector", "Supplier", "Employee", "Customer"].map(
+                    {ALLOWED_PUBLIC_ROLES.map(
                       (r) => (
                         <option key={r} value={r}>
                           {r}

@@ -5,10 +5,11 @@ const userSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true, lowercase: true },
   phone: { type: String, required: true },
   password: { type: String, required: true },
-  role: { type: String, enum: ['Admin','Collector','Supplier','Employee','Customer'], required: true },
+  role: { type: String, enum: ['Admin', 'Collector', 'Supplier', 'Employee', 'Customer'], required: true },
   uniqueId: { type: String, required: true, unique: true },
   company: { type: String },
   isActive: { type: Boolean, default: true },
+  createdBy: { type: String, default: 'system' }, // Track who created the user (e.g., 'public_signup' or 'admin_seed')
 }, { timestamps: true });
 
 export default mongoose.model('User', userSchema);

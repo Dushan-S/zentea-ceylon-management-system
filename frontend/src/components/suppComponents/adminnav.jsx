@@ -1,5 +1,19 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import {
+  LayoutDashboard,
+  ClipboardList,
+  FileBarChart,
+  AlertCircle
+} from 'lucide-react';
+
+const getIconByLabel = (label) => {
+  const key = label.toLowerCase();
+  if (key.includes('dashboard')) return LayoutDashboard;
+  if (key.includes('overview')) return FileBarChart;
+  if (key.includes('order')) return ClipboardList;
+  return AlertCircle;
+};
 
 export default function AdminNav({ sidebarItems }) {
   const loc = useLocation();
@@ -24,12 +38,20 @@ export default function AdminNav({ sidebarItems }) {
       <nav className="flex-1 px-3 py-4 space-y-1">
         {items.map((item, idx) => {
           const active = item.to && loc.pathname === item.to;
+          const IconComponent = getIconByLabel(item.label);
           const content = (
             <div
-              className={`flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium ${
+              className={`flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition ${
                 active ? 'bg-emerald-100 text-emerald-700' : 'text-slate-600 hover:bg-slate-100'
               }`}
             >
+              <span
+                className={`flex h-10 w-10 items-center justify-center rounded-lg ${
+                  active ? 'bg-white text-emerald-600 shadow-sm' : 'bg-slate-100 text-slate-500'
+                }`}
+              >
+                <IconComponent className="h-5 w-5" />
+              </span>
               <span>{item.label}</span>
             </div>
           );

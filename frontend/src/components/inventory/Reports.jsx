@@ -20,14 +20,14 @@ export default function Reports() {
   }
 
   return (
-    <div className="rounded-3xl border border-slate-100 bg-white/90 p-6 shadow-xl backdrop-blur">
+    <div className="rounded-3xl border border-slate-100 bg-white p-6 shadow-md">
       <h3 className="text-lg font-semibold text-slate-900">Inventory Reports</h3>
       <p className="mt-1 text-sm text-slate-500">Export structured PDF snapshots for audits, replenishment reviews, or supplier briefings.</p>
-      <div className="mt-4 flex flex-col gap-3 sm:flex-row">
+      <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
         <select
           value={type}
           onChange={(event) => setType(event.target.value)}
-          className="rounded-2xl border border-slate-200 bg-white/80 px-3 py-2 text-sm text-slate-700 shadow-sm focus:border-emerald-500 focus:outline-none"
+          className="w-full rounded-2xl border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-700 shadow-sm focus:border-emerald-500 focus:outline-none"
         >
           <option value="daily">Daily</option>
           <option value="weekly">Weekly</option>
@@ -36,7 +36,7 @@ export default function Reports() {
         <select
           value={category}
           onChange={(event) => setCategory(event.target.value)}
-          className="rounded-2xl border border-slate-200 bg-white/80 px-3 py-2 text-sm text-slate-700 shadow-sm focus:border-emerald-500 focus:outline-none"
+          className="w-full rounded-2xl border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-700 shadow-sm focus:border-emerald-500 focus:outline-none"
         >
           <option value="">All categories</option>
           {CATEGORIES.map((categoryOption) => (
@@ -48,7 +48,7 @@ export default function Reports() {
         <select
           value={status}
           onChange={(event) => setStatus(event.target.value)}
-          className="rounded-2xl border border-slate-200 bg-white/80 px-3 py-2 text-sm text-slate-700 shadow-sm focus:border-emerald-500 focus:outline-none"
+          className="w-full rounded-2xl border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-700 shadow-sm focus:border-emerald-500 focus:outline-none"
         >
           <option value="">All status</option>
           <option value="OK">OK</option>
@@ -60,7 +60,7 @@ export default function Reports() {
         <button
           type="button"
           onClick={download}
-          className="inline-flex items-center justify-center rounded-2xl bg-emerald-600 px-5 py-2 text-sm font-semibold text-white shadow-md transition hover:bg-emerald-700"
+          className="inline-flex w-full items-center justify-center rounded-2xl bg-emerald-600 px-5 py-2.5 text-sm font-semibold text-white shadow-md transition hover:bg-emerald-700"
         >
           Download PDF
         </button>

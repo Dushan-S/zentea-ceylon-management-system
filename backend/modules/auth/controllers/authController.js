@@ -13,9 +13,21 @@ export const signup = async (req, res, next) => {
   try {
     const { name, email, phone, password, confirmPassword, role, company } =
       req.body;
+    
+    // Allowed public roles - Admin is NOT allowed to be registered via public signup
+    const ALLOWED_PUBLIC_ROLES = ['Collector', 'Supplier', 'Employee', 'Customer'];
 
     if (!name || !email || !phone || !password || !confirmPassword || !role) {
       return res.status(400).json({ message: 'Missing required fields' });
+    }
+    
+    // Validate that role is not Admin and is in the allowed list
+    if (role.toLowerCase() === 'admin') {
+      return res.status(403).json({ message: 'Admin accounts cannot be created via public signup. Contact system administrator.' });
+    }
+    
+    if (!ALLOWED_PUBLIC_ROLES.includes(role)) {
+      return res.status(400).json({ message: `Invalid role. Allowed roles are: ${ALLOWED_PUBLIC_ROLES.join(', ')}` });
     }
     if (!noDigitsInName(name))
       return res

@@ -1,38 +1,48 @@
-﻿import React, { useEffect, useState, useMemo, useCallback } from 'react';
+import React, { useEffect, useState, useMemo, useCallback } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { io } from 'socket.io-client';
+import {
+  LayoutDashboard,
+  Package,
+  Boxes,
+  RefreshCw,
+  ShoppingBag,
+  ClipboardList,
+  FileBarChart,
+  Users,
+  Truck,
+  UserRound,
+  Settings,
+  LogOut,
+  DollarSign,
+  Leaf,
+  AlertCircle
+} from 'lucide-react';
 
 const API = (import.meta.env.VITE_API_URL || 'http://localhost:5000').replace(/\/$/, '');
 
-const iconMap = {
-  dashboard: (
-    <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0h6" />
-    </svg>
-  ),
-  users: (
-    <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-1a4 4 0 00-4-4h-1m-6 5h6m-6 0v-1a4 4 0 014-4h0a4 4 0 014 4v1m-6 0H7m6-16a4 4 0 11-8 0 4 4 0 018 0z" />
-    </svg>
-  ),
-  salary: (
-    <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M12 8c-3.866 0-7 1.79-7 4v5h14v-5c0-2.21-3.134-4-7-4zm0 0V6m0 2c3.866 0 7-1.79 7-4V5m-7 1c-3.866 0-7-1.79-7-4v1" />
-    </svg>
-  ),
-};
-
-const resolveIcon = (label) => {
+// Map label keywords to Lucide icons
+const getIconByLabel = (label) => {
   const key = label.toLowerCase();
-  if (key.includes('salary')) return iconMap.salary;
-  if (key.includes('user')) return iconMap.users;
-  if (key.includes('dashboard')) return iconMap.dashboard;
-  return (
-    <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
-      <circle cx="12" cy="12" r="9" />
-    </svg>
-  );
+  
+  if (key.includes('dashboard')) return LayoutDashboard;
+  if (key.includes('inventory') && key.includes('management')) return Package;
+  if (key.includes('inventory') && key.includes('stock') && !key.includes('restock')) return Boxes;
+  if (key.includes('restock')) return RefreshCw;
+  if (key.includes('product')) return ShoppingBag;
+  if (key.includes('overview')) return FileBarChart;
+  if (key.includes('order')) return ClipboardList;
+  if (key.includes('report')) return FileBarChart;
+  if (key.includes('employee')) return Users;
+  if (key.includes('supplier')) return Truck;
+  if (key.includes('customer')) return UserRound;
+  if (key.includes('settings')) return Settings;
+  if (key.includes('logout')) return LogOut;
+  if (key.includes('salary')) return DollarSign;
+  if (key.includes('cultivation') || key.includes('plot') || key.includes('crop')) return Leaf;
+  
+  return AlertCircle;
 };
 
 export default function DashboardShell({ children, menu, title = 'Dashboard', subtitle = 'Overview of your store performance' }) {
@@ -69,19 +79,20 @@ export default function DashboardShell({ children, menu, title = 'Dashboard', su
 
   return (
     <div className="flex min-h-screen bg-slate-50 text-slate-800">
-      <aside className="hidden md:flex md:w-64 lg:w-72 flex-col border-r border-slate-200 bg-white/80 backdrop-blur">
-        <div className="flex items-center gap-3 px-6 py-5 border-b border-slate-200">
-          <div className="h-10 w-10 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-xl font-semibold">
-            ZT
-          </div>
-          <div>
-            <p className="text-sm font-medium text-slate-500">ZenTea Seller Panel</p>
-            <p className="text-lg font-semibold text-slate-800">Dashboard</p>
+      <aside className="hidden md:flex md:w-64 lg:w-72 flex-col border-r border-slate-200 bg-white/80 backdrop-blur fixed inset-y-0 left-0 z-30">
+        <div className="flex items-center justify-center px-6 py-6 border-b border-slate-200">
+          <div className="flex items-center justify-center">
+            <img 
+              src="/images/logof.png" 
+              alt="ZenTea Logo" 
+              className="h-14 w-auto object-contain"
+            />
           </div>
         </div>
         <nav className="flex-1 px-3 py-4 space-y-1">
           {menu.map((item) => {
             const active = loc.pathname === item.to;
+            const IconComponent = getIconByLabel(item.label);
             return (
               <Link
                 key={item.to}
@@ -95,7 +106,7 @@ export default function DashboardShell({ children, menu, title = 'Dashboard', su
                     active ? 'bg-white text-emerald-600 shadow-sm' : 'bg-slate-100 text-slate-500'
                   }`}
                 >
-                  {resolveIcon(item.label)}
+                  <IconComponent className="h-5 w-5" />
                 </span>
                 {item.label}
               </Link>
@@ -133,8 +144,9 @@ export default function DashboardShell({ children, menu, title = 'Dashboard', su
                   logout();
                   nav('/');
                 }}
-                className="mt-2 inline-flex items-center gap-1 text-xs font-medium text-emerald-600 hover:text-emerald-700"
+                className="mt-2 inline-flex items-center gap-1 text-xs font-medium text-emerald-600 hover:text-emerald-700 transition"
               >
+                <LogOut className="h-3.5 w-3.5" />
                 <span>Logout</span>
               </button>
             </div>
@@ -142,7 +154,10 @@ export default function DashboardShell({ children, menu, title = 'Dashboard', su
         </div>
       </aside>
 
-      <main className="flex-1">
+      {/* Spacer to prevent main content overlay */}
+      <div className="hidden md:block md:w-64 lg:w-72 shrink-0" />
+
+      <main className="flex-1 min-w-0">
         <header className="sticky top-0 z-20 backdrop-blur bg-white/90 border-b border-slate-200">
           <div className="flex items-center justify-between px-6 py-5">
             <div>
