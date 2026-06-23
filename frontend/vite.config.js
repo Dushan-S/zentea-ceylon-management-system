@@ -6,7 +6,6 @@ export default defineConfig({
   
   resolve: {
     alias: {
-      // Stub out Node.js built-in modules for browser compatibility
       fs: false,
       path: false,
       os: false,
@@ -28,19 +27,8 @@ export default defineConfig({
   },
   
   define: {
-    // Define global process.env for compatibility with some libraries
     'process.env': {},
     global: 'globalThis',
-  },
-  
-  optimizeDeps: {
-    esbuildOptions: {
-      // Node.js global to browser globalThis
-      define: {
-        global: 'globalThis',
-      },
-    },
-    exclude: ['jspdf', 'html2canvas', 'canvg'],
   },
   
   server: {
@@ -56,16 +44,17 @@ export default defineConfig({
   },
   
   build: {
-    // Increase chunk size warning limit to avoid warnings for large chunks
     chunkSizeWarningLimit: 1000,
-    
-    // Optimize production build
     minify: 'esbuild',
     sourcemap: false,
     
     rollupOptions: {
+      // මෙය ඉතා වැදගත්: Node.js මොඩියුල බ්‍රව්සරයට බලෙන් ඇතුල් කිරීම වළක්වයි
+      external: [
+        'fs', 'path', 'os', 'crypto', 'child_process', 'util', 'stream', 
+        'buffer', 'process', 'tty', 'zlib', 'http', 'https', 'url', 'net', 'tls', 'dns'
+      ],
       output: {
-        // Manual chunks for better code splitting
         manualChunks: {
           'react-vendor': ['react', 'react-dom', 'react-router-dom'],
           'chart-vendor': ['chart.js', 'react-chartjs-2', 'recharts'],
@@ -75,7 +64,6 @@ export default defineConfig({
       },
     },
     
-    // Ensure compatibility with Vercel
     target: 'esnext',
     commonjsOptions: {
       transformMixedEsModules: true,
