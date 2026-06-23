@@ -10,8 +10,11 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.28.4",
+    "@gsap/react": "^2.1.2",
     "axios": "^1.7.2",
     "chart.js": "^4.5.0",
+    "framer-motion": "^12.40.0",
+    "gsap": "^3.15.0",
     "jspdf": "^3.0.3",
     "jspdf-autotable": "^5.0.2",
     "jwt-decode": "^4.0.0",
@@ -29,6 +32,7 @@
     "sweetalert2": "^11.12.4"
   },
   "devDependencies": {
+    "@rollup/rollup-win32-x64-msvc": "^4.62.2",
     "@types/node": "^20.11.19",
     "@vitejs/plugin-react": "^4.3.1",
     "autoprefixer": "^10.4.17",

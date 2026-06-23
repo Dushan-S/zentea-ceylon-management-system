@@ -79,3 +79,136 @@ Danupa Thamode
 ## Status
 
 Completed Academic Group Project
+
+---
+
+## Deployment to Vercel
+
+### Quick Deploy (3 Steps)
+
+#### 1. Set Environment Variables in Vercel Dashboard
+
+**Frontend:**
+```
+VITE_API_URL=https://your-backend-url.vercel.app
+VITE_WEATHER_API_KEY=your_openweather_api_key
+```
+
+**Backend:**
+```
+MONGODB_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret_key
+PORT=5001
+NODE_ENV=production
+```
+
+#### 2. Deploy
+
+**Option A: Vercel CLI**
+```bash
+npm install -g vercel
+vercel login
+vercel --prod
+```
+
+**Option B: GitHub Integration**
+1. Push code to GitHub
+2. Go to https://vercel.com/dashboard
+3. Import repository
+4. Configure environment variables
+5. Deploy!
+
+#### 3. Verify
+- Test frontend loads correctly
+- Test API endpoints (/api/*)
+- Check authentication works
+- Monitor Vercel logs
+
+---
+
+## Local Development
+
+### Install Dependencies
+```bash
+# Install all
+npm run install:all
+
+# Or individually
+cd frontend && npm install
+cd backend && npm install
+```
+
+### Run Development Servers
+
+**Frontend:**
+```bash
+cd frontend
+npm run dev
+```
+Runs on: http://localhost:5173
+
+**Backend:**
+```bash
+cd backend
+npm run dev
+```
+Runs on: http://localhost:5001
+
+### Build for Production
+```bash
+cd frontend
+npm run build
+```
+
+---
+
+## Project Structure
+
+```
+├── backend/              # Node.js Express API
+│   ├── config/           # Configuration
+│   ├── middleware/       # Auth & validation
+│   ├── models/           # MongoDB models
+│   ├── modules/          # Feature modules
+│   └── server.js         # Entry point
+├── frontend/             # React Vite App
+│   ├── src/              # Source code
+│   ├── public/           # Static assets
+│   └── vite.config.js    # Build config
+├── vercel.json           # Vercel configuration
+└── .vercelignore         # Deployment exclusions
+```
+
+---
+
+## Environment Files
+
+### Frontend (.env)
+```env
+VITE_API_URL=http://localhost:5001
+VITE_WEATHER_API_KEY=your_api_key
+```
+
+### Backend (.env)
+```env
+MONGODB_URI=mongodb://localhost:27017/zentea
+JWT_SECRET=your_secret_key
+PORT=5001
+NODE_ENV=development
+```
+
+---
+
+## Important Notes
+
+- ✅ Node.js polyfills configured for browser compatibility
+- ✅ Code splitting enabled for optimized loading
+- ✅ Separate builds for frontend and backend
+- ✅ All dependencies properly installed
+- ✅ Production build tested and working
+
+---
+
+## Support
+
+For Vercel deployment help: https://vercel.com/docs
