@@ -13,9 +13,19 @@ gsap.registerPlugin(ScrollTrigger);
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const location = useLocation();
   const { user } = useAuth();
   const { getTotalItems, toggleCart } = useCart();
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -42,6 +52,7 @@ const Navbar = () => {
   const closeMenu = () => setMenuOpen(false);
 
   const isCustomer = !!(user && user.role?.toLowerCase().includes('customer'));
+  const isHomePage = location.pathname === '/';
 
   return (
     <nav
@@ -51,7 +62,11 @@ const Navbar = () => {
     >
       <div className="relative mx-auto flex w-full max-w-6xl items-center px-5 sm:px-7 lg:px-9 py-4">
         <Link to="/" className="flex items-center gap-2 text-white">
-          <img src="/images/logof.png" alt="logo" className="h-12 w-auto" />
+          <img 
+            src="/images/logof.png" 
+            alt="logo" 
+            className="h-12 w-auto"
+          />
         </Link>
 
         <div className="ml-auto hidden md:flex items-center gap-12">

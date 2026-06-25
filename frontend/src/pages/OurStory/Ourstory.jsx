@@ -275,7 +275,7 @@ export default function OurStory() {
                 <img
                   src="/images/sign3.png"
                   alt="Leaf inspection"
-                  className="h-[320px] w-full rounded-2xl object-cover"
+                  className="hidden sm:block h-[320px] w-full rounded-2xl object-cover"
                   loading="lazy"
                 />
               </div>
