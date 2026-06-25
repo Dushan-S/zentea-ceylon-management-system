@@ -17,7 +17,7 @@ export default function Footer() {
   return (
     <footer
       ref={footerRef}
-      className="relative text-white py-12 md:py-20 px-4 md:px-8"
+      className="relative text-white py-6 md:py-10 px-4 md:px-8"
       style={{
         backgroundImage: "url('images/footer-bg.jpg')",
         backgroundSize: "cover",
@@ -28,7 +28,7 @@ export default function Footer() {
       {/* Overlay */}
       <div className="absolute inset-0 bg-black/40"></div>
 
-      <div className="relative z-10 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+      <div className="relative z-10 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
         {/* Logo Section */}
         <div className="text-center md:text-left">
           <img src="images/ceylon-logo.png" alt="Ceylon Tea" className="w-24 md:w-32 mb-4 mx-auto md:mx-0" />
@@ -72,7 +72,7 @@ export default function Footer() {
       </div>
 
       {/* Copyright */}
-      <div className="relative z-10 max-w-7xl mx-auto mt-8 md:mt-12 pt-6 md:pt-8 border-t border-white/20 text-center">
+      <div className="relative z-10 max-w-7xl mx-auto mt-6 md:mt-8 pt-4 md:pt-6 border-t border-white/20 text-center">
         <p className="text-xs md:text-sm text-white/80">
           © {new Date().getFullYear()} ZenTea Ceylon. All rights reserved.
         </p>
