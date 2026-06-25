@@ -77,8 +77,11 @@ const Hero = () => {
                     style={{ objectPosition: isMobile ? 'left center' : 'center' }}
                 />
 
+                {/* Subtle dark overlay for better text visibility */}
+                <div className="absolute inset-0 bg-black/10 z-[1]"></div>
+
                 <div className="relative z-20 flex flex-col items-center justify-center h-full px-4 py-6 text-white">
-                    <h1 ref={titleRef} className="title hero-text mt-12 md:mt-0 drop-shadow-[0_4px_8px_rgba(0,0,0,0.8)]">ZenTea</h1>
+                    <h1 ref={titleRef} className="title hero-text mt-12 md:mt-0 drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">ZenTea</h1>
 
                     <div className="content text-center mt-3 md:mt-6 max-w-lg px-4">
                         <p className="subtitle hero-text text-lg md:text-3xl font-bold drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">Finest Ceylon Tea</p>
