@@ -68,31 +68,34 @@ const Hero = () => {
 
     return (
         <>
-            <section ref={heroRef} id="hero" className="relative min-h-screen w-full overflow-hidden">
-                {/* Background image */}
+            <section ref={heroRef} id="hero" className="relative h-[85vh] md:min-h-screen w-full overflow-hidden">
+                {/* Background image - optimized for mobile to show the girl */}
                 <img
                     src="/images/hero1.png"
                     alt="ZenTea Hero"
-                    className="absolute inset-0 w-full h-full object-cover z-[-1]"
+                    className="absolute inset-0 w-full h-full object-cover z-0"
+                    style={{ objectPosition: isMobile ? 'left center' : 'center' }}
                 />
 
+                {/* Subtle dark overlay for better text visibility */}
+                <div className="absolute inset-0 bg-black/10 z-[1]"></div>
 
-                <div className="relative z-10 flex flex-col items-center justify-center h-full text-white">
-                    <h1 ref={titleRef} className="title hero-text">ZenTea</h1>
+                <div className="relative z-20 flex flex-col items-center justify-center h-full px-4 py-6 text-white">
+                    <h1 ref={titleRef} className="title hero-text mt-12 md:mt-0 drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">ZenTea</h1>
 
-                    <div className="content text-center mt-6">
-                        <p className="subtitle hero-text text-xl md:text-3xl font-bold">Finest Ceylon Tea</p>
-                        <p className="subtitle mt-4 max-w-xl hero-text font-medium text-white/90">
+                    <div className="content text-center mt-3 md:mt-6 max-w-lg px-4">
+                        <p className="subtitle hero-text text-lg md:text-3xl font-bold drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">Finest Ceylon Tea</p>
+                        <p className="subtitle mt-2 md:mt-4 hero-text text-sm md:text-base font-medium text-white leading-relaxed drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
                            Summer is one of our favourite seasons and we are bringing you a collection
                             of the finest Ceylon Tea to keep you cool and refreshed all Summer long!
                         </p>
-                        <div className="flex justify-center mt-3 hero-text">
+                        <div className="flex justify-center mt-3 md:mt-6 hero-text">
                             <Link
                                 to="/shop"
-                                className="group flex items-center gap-2 px-5 py-2 bg-white text-black font-bold rounded-full hover:bg-transparent hover:text-white border-2 border-white transition-all duration-300 uppercase tracking-widest text-[10px]"
+                                className="group flex items-center gap-2 px-6 py-2.5 md:px-8 md:py-3 bg-white text-black font-bold rounded-full hover:bg-transparent hover:text-white border-2 border-white transition-all duration-300 uppercase tracking-widest text-xs md:text-sm shadow-[0_4px_12px_rgba(0,0,0,0.4)]"
                             >
                                 Shop Now
-                                <ArrowRight className="w-3 h-3 transition-transform duration-300 group-hover:translate-x-1" />
+                                <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
                             </Link>
                         </div>
                     </div>
