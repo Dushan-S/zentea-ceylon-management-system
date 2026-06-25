@@ -718,12 +718,13 @@ export default function AdminDashboard() {
 
         {/* Users Table */}
         <div className="rounded-xl border border-gray-200 bg-white shadow-sm overflow-hidden">
-          <div className="overflow-x-auto">
+          {/* Desktop Table View */}
+          <div className="hidden sm:block overflow-x-auto">
             <table className="w-full divide-y divide-gray-200 text-sm">
               <thead className="bg-gray-50 border-b border-gray-200">
                 <tr>
                   {['Name', 'Email', 'Role', 'Unique ID', 'Status', 'Actions'].map((heading) => (
-                    <th key={heading} className="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-gray-700">
+                    <th key={heading} className="px-4 lg:px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-gray-700">
                       {heading}
                     </th>
                   ))}
@@ -732,15 +733,15 @@ export default function AdminDashboard() {
               <tbody className="divide-y divide-gray-200">
                 {filteredUsers.map((u) => (
                   <tr key={u._id} className="hover:bg-gray-50 transition-colors">
-                    <td className="px-6 py-4 font-semibold text-gray-900">{u.name}</td>
-                    <td className="px-6 py-4 text-gray-600">{u.email}</td>
-                    <td className="px-6 py-4">
+                    <td className="px-4 lg:px-6 py-4 font-semibold text-gray-900">{u.name}</td>
+                    <td className="px-4 lg:px-6 py-4 text-gray-600 break-all">{u.email}</td>
+                    <td className="px-4 lg:px-6 py-4">
                       <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
                         {u.role}
                       </span>
                     </td>
-                    <td className="px-6 py-4 text-gray-600 font-mono">{u.uniqueId}</td>
-                    <td className="px-6 py-4">
+                    <td className="px-4 lg:px-6 py-4 text-gray-600 font-mono">{u.uniqueId}</td>
+                    <td className="px-4 lg:px-6 py-4">
                       <span className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold ${
                         u.isActive
                           ? 'bg-emerald-50 text-emerald-700'
@@ -750,7 +751,7 @@ export default function AdminDashboard() {
                         {u.isActive ? 'Active' : 'Pending'}
                       </span>
                     </td>
-                    <td className="px-6 py-4">
+                    <td className="px-4 lg:px-6 py-4">
                       <div className="flex items-center gap-2">
                         <button
                           type="button"
@@ -780,6 +781,68 @@ export default function AdminDashboard() {
             </table>
           </div>
 
+          {/* Mobile Card View */}
+          <div className="sm:hidden divide-y divide-gray-200">
+            {filteredUsers.map((u) => (
+              <div key={u._id} className="p-4 space-y-3">
+                <div>
+                  <span className="text-xs font-semibold text-gray-500 uppercase tracking-wide block mb-1">Name</span>
+                  <span className="text-sm font-semibold text-gray-900 block">{u.name}</span>
+                </div>
+                <div>
+                  <span className="text-xs font-semibold text-gray-500 uppercase tracking-wide block mb-1">Email</span>
+                  <span className="text-sm text-gray-600 block break-all">{u.email}</span>
+                </div>
+                <div>
+                  <span className="text-xs font-semibold text-gray-500 uppercase tracking-wide block mb-1">Role</span>
+                  <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                    {u.role}
+                  </span>
+                </div>
+                <div>
+                  <span className="text-xs font-semibold text-gray-500 uppercase tracking-wide block mb-1">Unique ID</span>
+                  <span className="text-sm text-gray-600 font-mono block">{u.uniqueId}</span>
+                </div>
+                <div>
+                  <span className="text-xs font-semibold text-gray-500 uppercase tracking-wide block mb-1">Status</span>
+                  <span className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold ${
+                    u.isActive
+                      ? 'bg-emerald-50 text-emerald-700'
+                      : 'bg-amber-50 text-amber-700'
+                  }`}>
+                    <span className={`h-2 w-2 rounded-full ${u.isActive ? 'bg-emerald-600' : 'bg-amber-600'}`} />
+                    {u.isActive ? 'Active' : 'Pending'}
+                  </span>
+                </div>
+                <div>
+                  <span className="text-xs font-semibold text-gray-500 uppercase tracking-wide block mb-2">Actions</span>
+                  <div className="flex flex-col sm:flex-row gap-2">
+                    <button
+                      type="button"
+                      onClick={() => update(u, { isActive: !u.isActive })}
+                      className={`flex-1 px-4 py-2 rounded-lg text-sm font-semibold transition-colors ${
+                        u.isActive
+                          ? 'bg-red-50 text-red-600 hover:bg-red-100'
+                          : 'bg-emerald-50 text-emerald-600 hover:bg-emerald-100'
+                      }`}
+                    >
+                      {u.isActive ? 'Revoke Access' : 'Approve User'}
+                    </button>
+                    <select
+                      defaultValue={u.role}
+                      onChange={(e) => update(u, { role: e.target.value })}
+                      className="flex-1 px-4 py-2 rounded-lg border border-gray-300 bg-white text-sm font-semibold text-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all"
+                    >
+                      {roleOrder.map((r) => (
+                        <option key={r} value={r}>{r}</option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
           {/* Empty State */}
           {filteredUsers.length === 0 && list.length > 0 && (
             <div className="py-12 text-center px-6">
@@ -806,10 +869,11 @@ export default function AdminDashboard() {
         <div className="flex justify-end">
           <button
             onClick={() => setShowReportGenerator(!showReportGenerator)}
-            className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-white bg-emerald-600 hover:bg-emerald-700 rounded-lg transition-colors shadow-sm"
+            className="inline-flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 text-sm font-semibold text-white bg-emerald-600 hover:bg-emerald-700 rounded-lg transition-colors shadow-sm"
           >
             <Download className="h-4 w-4" />
-            Generate Report
+            <span className="hidden sm:inline">Generate Report</span>
+            <span className="sm:hidden">Report</span>
           </button>
         </div>
       </div>

@@ -12,7 +12,8 @@ export default function ResponsiveTable({
   onRowClick,
   loading = false,
   emptyMessage = 'No data available',
-  className = ''
+  className = '',
+  mobileCardView = true // Enable card view on mobile by default
 }) {
   const [sortKey, setSortKey] = React.useState(null);
   const [sortOrder, setSortOrder] = React.useState('asc');
@@ -41,7 +42,8 @@ export default function ResponsiveTable({
 
   return (
     <div className={`rounded-xl border border-gray-200 bg-white shadow-sm overflow-hidden ${className}`}>
-      <div className="overflow-x-auto">
+      {/* Desktop Table View */}
+      <div className="hidden sm:block overflow-x-auto">
         <table className="w-full divide-y divide-gray-200 text-sm">
           <thead className="bg-gray-50 border-b border-gray-200">
             <tr>
@@ -49,7 +51,7 @@ export default function ResponsiveTable({
                 <th
                   key={col.key}
                   onClick={() => col.sortable && handleSort(col.key)}
-                  className={`px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-gray-700 ${
+                  className={`px-4 lg:px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-gray-700 ${
                     col.sortable ? 'cursor-pointer hover:bg-gray-100' : ''
                   }`}
                 >
@@ -87,7 +89,7 @@ export default function ResponsiveTable({
                   className={`hover:bg-gray-50 transition-colors ${onRowClick ? 'cursor-pointer' : ''}`}
                 >
                   {columns.map((col) => (
-                    <td key={col.key} className="px-6 py-4 text-gray-900">
+                    <td key={col.key} className="px-4 lg:px-6 py-4 text-gray-900">
                       {col.render ? col.render(row[col.key], row) : row[col.key]}
                     </td>
                   ))}
@@ -97,6 +99,43 @@ export default function ResponsiveTable({
           </tbody>
         </table>
       </div>
+
+      {/* Mobile Card View */}
+      {mobileCardView && (
+        <div className="sm:hidden divide-y divide-gray-200">
+          {loading ? (
+            <div className="px-4 py-12 text-center">
+              <div className="flex items-center justify-center gap-2 text-gray-500">
+                <div className="h-5 w-5 border-2 border-gray-300 border-t-emerald-600 rounded-full animate-spin" />
+                Loading...
+              </div>
+            </div>
+          ) : sortedData.length === 0 ? (
+            <div className="px-4 py-12 text-center text-gray-500">
+              {emptyMessage}
+            </div>
+          ) : (
+            sortedData.map((row, idx) => (
+              <div
+                key={idx}
+                onClick={() => onRowClick?.(row)}
+                className={`p-4 ${onRowClick ? 'cursor-pointer active:bg-gray-50' : ''}`}
+              >
+                {columns.map((col) => (
+                  <div key={col.key} className="mb-2 last:mb-0">
+                    <span className="text-xs font-semibold text-gray-500 uppercase tracking-wide block mb-1">
+                      {col.label}
+                    </span>
+                    <span className="text-sm text-gray-900 block">
+                      {col.render ? col.render(row[col.key], row) : row[col.key]}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            ))
+          )}
+        </div>
+      )}
     </div>
   );
 }
