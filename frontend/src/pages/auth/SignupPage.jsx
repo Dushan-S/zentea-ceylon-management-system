@@ -109,7 +109,7 @@ export default function SignupPage() {
       {/* Card */}
       <div className="relative w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 bg-white/95 rounded-2xl shadow-lg overflow-hidden ring-1 ring-black/5">
         {/* Form */}
-        <div className="p-5 md:p-6 bg-white order-1 md:order-2">
+        <div className="p-5 md:p-6 bg-white order-2 md:order-2">
           <div className="h-full flex flex-col justify-between max-w-[300px] w-full mx-auto">
             <h1 className="text-[22px] font-semibold text-black mb-2">
               Create an account
@@ -263,7 +263,7 @@ export default function SignupPage() {
         </div>
 
         {/* Slideshow */}
-        <div className="relative min-h-[220px] md:min-h-[320px] order-2 md:order-1 overflow-hidden rounded-b-2xl md:rounded-b-none md:rounded-r-2xl">
+        <div className="relative min-h-[220px] md:min-h-[320px] order-1 md:order-1 overflow-hidden rounded-b-2xl md:rounded-b-none md:rounded-r-2xl">
           {slides.map((src, i) => (
             <img
               key={src}
