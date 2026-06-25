@@ -231,14 +231,12 @@ const Shop = () => {
       <div className="min-h-screen">
         {/* Hero Section */}
         <section
-          className="min-h-screen relative flex items-start pt-24 md:pt-32 pb-16"
+          className="h-[100vh] md:min-h-screen relative flex items-start pt-24 md:pt-20 pb-16 bg-cover bg-center md:bg-center"
           style={{
-            backgroundImage: 'url(/images/shopBg.png)',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center center'
+            backgroundImage: 'url(/images/shopBg.png)'
           }}
         >
-          <div className="absolute inset-0 bg-gradient-to-t from-white/80 via-white/40 to-white/60 md:bg-gradient-to-b md:from-transparent md:to-white/10"></div>
+          <div className="absolute inset-0"></div>
           <div className="container mx-auto px-4 z-10">
             <div className="max-w-md md:max-w-3xl mx-auto text-center space-y-4 md:space-y-6">
               <motion.p
@@ -253,9 +251,9 @@ const Shop = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-xl md:text-[32px] font-semibold text-[#006838] leading-snug md:leading-tight"
+                className="text-lg md:text-[28px] font-semibold text-[#006838] leading-snug md:leading-tight"
               >
-                bring the wonder of nature to everyday moments with our delicious herbal teas
+                Bring the wonder of nature to everyday moments with our delicious herbal teas
               </motion.h1>
             </div>
           </div>

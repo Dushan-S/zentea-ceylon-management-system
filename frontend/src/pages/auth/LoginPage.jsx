@@ -63,7 +63,7 @@ export default function LoginPage() {
       {/* Card */}
       <div className="relative w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 bg-white/95 rounded-2xl shadow-xl overflow-hidden ring-1 ring-black/5 min-h-[520px]">
         {/* Form */}
-        <div className="p-6 bg-white order-1 md:order-2 flex items-center">
+        <div className="p-6 bg-white order-2 md:order-2 flex items-center">
           <div className="w-full max-w-[320px] mx-auto flex flex-col items-center justify-center text-center h-full">
             {/* Heading */}
             <h1 className="text-[23px] font-semibold text-black mb-0">
@@ -133,7 +133,7 @@ export default function LoginPage() {
         </div>
 
         {/* Slideshow */}
-        <div className="relative min-h-[300px] md:min-h-[520px] order-2 md:order-1 overflow-hidden rounded-b-2xl md:rounded-b-none md:rounded-r-2xl">
+        <div className="relative min-h-[300px] md:min-h-[520px] order-1 md:order-1 overflow-hidden rounded-b-2xl md:rounded-b-none md:rounded-r-2xl">
           {slides.map((src, i) => (
             <img
               key={src}

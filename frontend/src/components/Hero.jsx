@@ -80,7 +80,7 @@ const Hero = () => {
                 {/* Subtle dark overlay - only visible on mobile */}
                 <div className="absolute inset-0 bg-black/15 z-[1] md:hidden"></div>
 
-                <div className="relative z-20 flex flex-col items-center justify-center h-full px-4 py-6 pt-40 md:py-6 text-white">
+                <div className="relative z-20 flex flex-col items-center justify-center h-full px-4 py-6 pt-40 md:pt-12 md:py-6 text-white">
                     <h1 
                         ref={titleRef} 
                         className="title hero-text mt-12 md:mt-0 text-[12rem] md:text-[20vw] !text-white"
@@ -89,7 +89,7 @@ const Hero = () => {
                         ZenTea
                     </h1>
 
-                    <div className="content text-center mt-3 md:mt-6 max-w-lg px-4">
+                    <div className="content text-center mt-0 md:mt-1 max-w-lg px-4">
                         <p className="subtitle hero-text text-lg md:text-3xl font-bold">Finest Ceylon Tea</p>
                         <p className="subtitle mt-2 md:mt-4 hero-text text-sm md:text-base font-medium text-white leading-relaxed">
                             Summer is one of our favourite seasons and we are bringing you a collection of the finest Ceylon Tea to keep you cool and refreshed all Summer long!
@@ -97,7 +97,7 @@ const Hero = () => {
                         <div className="flex justify-center mt-3 md:mt-6 hero-text">
                             <Link
                                 to="/shop"
-                                className="group flex items-center gap-2 px-6 py-2.5 md:px-8 md:py-3 bg-white text-black font-bold rounded-full hover:bg-transparent hover:text-white border-2 border-white transition-all duration-300 uppercase tracking-widest text-xs md:text-sm"
+                                className="group flex items-center gap-2 px-4 py-1.5 md:px-5 md:py-2 bg-white text-black font-bold rounded-full hover:bg-transparent hover:text-white border-2 border-white transition-all duration-300 uppercase tracking-widest text-xs md:text-sm"
                             >
                                 Shop Now
                                 <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
