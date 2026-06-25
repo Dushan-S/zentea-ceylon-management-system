@@ -235,12 +235,12 @@ const Shop = () => {
           style={{
             backgroundImage: 'url(/images/shopBg.png)',
             backgroundSize: 'cover',
-            backgroundPosition: 'center'
+            backgroundPosition: 'center center'
           }}
         >
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white/10"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-white/80 via-white/40 to-white/60 md:bg-gradient-to-b md:from-transparent md:to-white/10"></div>
           <div className="container mx-auto px-4 z-10">
-            <div className="max-w-3xl mx-auto text-center space-y-6">
+            <div className="max-w-md md:max-w-3xl mx-auto text-center space-y-4 md:space-y-6">
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -253,7 +253,7 @@ const Shop = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-[32px] font-semibold text-[#006838] leading-tight"
+                className="text-xl md:text-[32px] font-semibold text-[#006838] leading-snug md:leading-tight"
               >
                 bring the wonder of nature to everyday moments with our delicious herbal teas
               </motion.h1>
@@ -303,17 +303,19 @@ const Shop = () => {
             
 
             <div className="max-w-7xl mx-auto">
-              <div className="mb-6">
-                <div className="flex flex-col gap-3">
-                  <div className="flex flex-wrap items-center justify-between">
-                    <div className="flex flex-wrap items-center gap-3">
+              <div className="mb-8">
+                <div className="flex flex-col gap-4">
+                  {/* Filter Section */}
+                  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                    {/* Filters */}
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
                       <span className="text-sm font-semibold text-gray-900">Filter:</span>
-                      <div className="flex flex-wrap items-center gap-3">
-                        <div className="relative">
+                      <div className="flex flex-wrap items-center gap-3 w-full sm:w-auto">
+                        <div className="relative flex-1 sm:flex-none min-w-[140px]">
                           <select
                             value={priceFilter}
                             onChange={handlePriceChange}
-                            className="w-[120px] appearance-none rounded border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-900 shadow-sm transition-colors duration-200 focus:outline-none"
+                            className="w-full sm:w-[140px] appearance-none rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-sm font-medium text-gray-900 shadow-sm transition-all duration-200 focus:outline-none focus:border-[#0b6b3c] focus:ring-2 focus:ring-[#0b6b3c]/20"
                           >
                             {availablePriceFilters.map((option) => (
                               <option key={option.id} value={option.id}>
@@ -323,11 +325,11 @@ const Shop = () => {
                           </select>
                           <CaretDownIcon className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-700" />
                         </div>
-                        <div className="relative">
+                        <div className="relative flex-1 sm:flex-none min-w-[140px]">
                           <select
                             value={teaTypeFilter}
                             onChange={handleTeaTypeChange}
-                            className="w-[120px] appearance-none rounded border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-900 shadow-sm transition-colors duration-200 focus:outline-none"
+                            className="w-full sm:w-[140px] appearance-none rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-sm font-medium text-gray-900 shadow-sm transition-all duration-200 focus:outline-none focus:border-[#0b6b3c] focus:ring-2 focus:ring-[#0b6b3c]/20"
                           >
                             <option value="all">Tea Type</option>
                             <option value="black-tea">Black Tea</option>
@@ -341,13 +343,14 @@ const Shop = () => {
                       </div>
                     </div>
                     
-                    <div className="flex flex-wrap items-center gap-2">
+                    {/* Sort By */}
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
                       <span className="text-sm font-semibold text-gray-900">Sort by:</span>
-                      <div className="relative">
+                      <div className="relative w-full sm:w-auto min-w-[200px]">
                         <select
                           value={sortBy}
                           onChange={handleSortChange}
-                          className="w-[200px] appearance-none rounded border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-900 shadow-sm transition-colors duration-200 focus:outline-none"
+                          className="w-full sm:w-[200px] appearance-none rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-sm font-medium text-gray-900 shadow-sm transition-all duration-200 focus:outline-none focus:border-[#0b6b3c] focus:ring-2 focus:ring-[#0b6b3c]/20"
                         >
                           {sortOptions.map((option) => (
                             <option key={option.id} value={option.id}>
@@ -360,7 +363,8 @@ const Shop = () => {
                     </div>
                   </div>
                   
-                  <div className="text-sm text-gray-600">{resultsText}</div>
+                  {/* Results Count */}
+                  <div className="text-sm text-gray-600 font-medium">{resultsText}</div>
                 </div>
               </div>
             </div>
